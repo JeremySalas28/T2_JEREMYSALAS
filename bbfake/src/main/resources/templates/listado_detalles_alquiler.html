@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalles de Alquiler</title>
+</head>
+<body>
+<h2>Detalles de Alquiler</h2>
+<table border="1">
+    <tr>
+        <th>ID Alquiler</th>
+        <th>ID Película</th>
+        <th>Cantidad</th>
+    </tr>
+    <tr th:each="detalle : ${listaDetalles}">
+        <td th:text="${detalle.alquiler.idAlquiler}"></td>
+        <td th:text="${detalle.pelicula.id_pelicula}"></td>
+        <td th:text="${detalle.cantidad}"></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registro de Cliente</title>
+    <style>
+        body {
+            background: #18191a;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: #23232b;
+            border-radius: 20px;
+            box-shadow: 0 0 30px 5px #a259ff;
+            padding: 40px 30px 30px 30px;
+            width: 350px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 0 0 10px #a259ff, 0 0 20px #a259ff;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px 0;
+            font-weight: bold;
+            color: #a259ff;
+            text-align: left;
+        }
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            margin-bottom: 10px;
+            background: #18191a;
+            color: #fff;
+            box-shadow: 0 0 5px #a259ff44;
+            font-size: 1em;
+        }
+        button {
+            background: #a259ff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 30px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 15px;
+            box-shadow: 0 0 10px #a259ff88;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #7c3aed;
+        }
+        .volver {
+            display: block;
+            margin: 25px auto 0 auto;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95em;
+        }
+        .volver:hover {
+            color: #a259ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Cliente</h1>
+        <form th:action="@{/clientes/registro}" th:object="${cliente}" method="post">
+            <label>Nombre:</label>
+            <input type="text" th:field="*{nombre}" required/>
+            <label>Email:</label>
+            <input type="email" th:field="*{email}" required/>
+            <button type="submit">Registrar</button>
+        </form>
+        <form th:action="@{/clientes/vista}">
+            <button class="volver" type="submit">Volver al listado</button>
+        </form>
+    </div>
+</body>
+</html>

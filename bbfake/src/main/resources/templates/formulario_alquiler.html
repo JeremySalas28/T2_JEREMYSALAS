@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nuevo Alquiler</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { background: #181a1b; color: #f8f9fa; min-height: 100vh; }
+        .main-card {
+            background: #23272b;
+            border-radius: 40px;
+            box-shadow: 0 0 40px #00000080, 0 0 20px 4px #a259f7, 0 0 60px 8px #a259f7;
+            padding: 3rem 2rem 2.5rem 2rem;
+            max-width: 500px;
+            width: 90vw;
+            margin: 5vh auto;
+            border: 3px solid #a259f7;
+        }
+        .main-title {
+            color: #fff;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .form-label { color: #a259f7; font-weight: 700; }
+        .btn-custom {
+            background: #212529;
+            color: #f8f9fa;
+            border: none;
+            transition: box-shadow 0.3s, background 0.3s, color 0.3s;
+            font-size: 1.1rem;
+            font-family: 'Montserrat', Arial, sans-serif;
+            padding: 0.7rem 2.5rem;
+            border-radius: 30px;
+            margin-top: 1.5rem;
+            font-weight: 700;
+        }
+        .btn-custom:hover {
+            background: #343a40;
+            color: #a259f7;
+            box-shadow: 0 0 10px #a259f7, 0 0 20px #343a40;
+        }
+        .btn-cancel-neon {
+        background: #212529;
+        color: #ff3b3b;
+        border: none;
+        border-radius: 30px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        font-family: 'Montserrat', Arial, sans-serif;
+        padding: 0.7rem 2.5rem;
+        margin-top: 1.5rem;
+        box-shadow: 0 0 10px #ff3b3b, 0 0 20px #343a40;
+        transition: box-shadow 0.3s, background 0.3s, color 0.3s;
+        }
+        .btn-cancel-neon:hover {
+        background: #343a40;
+        color: #fff;
+        box-shadow: 0 0 20px #ff3b3b, 0 0 40px #ff3b3b;
+        }
+    </style>
+</head>
+<body>
+<div class="main-card">
+    <h2 class="main-title">Nuevo Alquiler</h2>
+    <form th:action="@{/alquiler/guardar}" method="post">
+        <div class="mb-3">
+            <label for="cliente" class="form-label">Cliente</label>
+            <select id="cliente" name="cliente" class="form-select">
+                <option value="">Seleccione un cliente</option>
+                <option th:each="c : ${clientes}" th:value="${c.id_cliente}" th:text="${c.nombre}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="pelicula" class="form-label">Película</label>
+            <select id="pelicula" name="pelicula" class="form-select" onchange="calcularTotal()">
+                <option value="" data-precio="0">Seleccione una película</option>
+                <option th:each="p : ${peliculas}" th:value="${p.id_pelicula}" th:text="${p.titulo}" th:attr="data-precio=${p.precio}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="cantidad" class="form-label">Cantidad</label>
+            <input type="number" min="1" id="cantidad" name="cantidad" class="form-control" placeholder="Ingrese la cantidad" required oninput="calcularTotal()">
+        </div>
+        <div class="mb-3">
+            <label for="total" class="form-label">Total</label>
+            <input type="text" id="total" name="total" class="form-control" readonly style="background:#181a1b; color:#a259f7; font-weight:bold;">
+        </div>
+            <button type="submit" class="btn btn-custom">Guardar Alquiler</button>
+            <a href="/" class="btn btn-cancel-neon ms-2 btn-lg px-5">Cancelar</a>
+            <a href="/alquileres/vista" class="btn btn-custom ms-2">Ver Alquileres</a>
+    </form>
+</div>
+<script>
+    function calcularTotal() {
+        const select = document.getElementById('pelicula');
+        const cantidad = parseInt(document.getElementById('cantidad').value) || 0;
+        const precio = parseFloat(select.options[select.selectedIndex].getAttribute('data-precio')) || 0;
+        const total = cantidad * precio;
+        document.getElementById('total').value = total > 0 ? total.toFixed(2) : '';
+    }
+</script>
+</body>
+</html>

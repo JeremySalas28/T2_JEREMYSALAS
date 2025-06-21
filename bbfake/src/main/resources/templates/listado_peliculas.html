@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Películas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #18191a;
+            color: #fff;
+            font-family: 'Montserrat', Arial, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .main-card {
+            background: #23232b;
+            border-radius: 20px;
+            box-shadow: 0 0 30px 5px #a259ff;
+            padding: 40px 30px 30px 30px;
+            width: 600px;
+            max-width: 95vw;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 0 0 10px #a259ff, 0 0 20px #a259ff;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: #23232b;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 14px 8px;
+            text-align: center;
+        }
+        th {
+            background: #18191a;
+            color: #a259ff;
+            font-size: 1.1em;
+        }
+        tr:nth-child(even) {
+            background: #29293a;
+        }
+        tr:nth-child(odd) {
+            background: #23232b;
+        }
+        .btn-custom {
+            background: #a259ff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 30px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 15px;
+            box-shadow: 0 0 10px #a259ff88;
+            transition: background 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-custom:hover {
+            background: #7c3aed;
+        }
+    </style>
+</head>
+<body>
+<div class="main-card">
+    <h2>Listado de Películas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Género</th>
+                <th>Stock</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="pelicula : ${listaPeliculas}">
+                <td th:text="${pelicula.titulo}"></td>
+                <td th:text="${pelicula.genero}"></td>
+                <td th:text="${pelicula.stock}"></td>
+                <td th:text="${pelicula.precio}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/" class="btn-custom">Volver al inicio</a>
+</div>
+</body>
+</html>
