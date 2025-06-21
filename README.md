@@ -69,7 +69,7 @@ src/
 
 ## Autores
 
-- Desarrollado por [Tu Nombre]
+- Desarrollado por Jeremy Salas
 
 ---
 
